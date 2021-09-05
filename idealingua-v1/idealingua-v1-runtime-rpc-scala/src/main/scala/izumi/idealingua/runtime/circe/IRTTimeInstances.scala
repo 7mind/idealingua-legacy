@@ -1,15 +1,70 @@
 package izumi.idealingua.runtime.circe
 
-import java.time.format.{DateTimeFormatter, DateTimeParseException}
-import java.time._
-
-import izumi.fundamentals.platform.time.IzTime
 import io.circe.{Decoder, DecodingFailure, Encoder, Json}
+import izumi.fundamentals.platform.time.IzTime
 
-object IRTTimeInstances extends IRTTimeInstances
+import java.time._
+import java.time.format.{DateTimeFormatter, DateTimeParseException}
 
 trait IRTTimeInstances {
-  import izumi.fundamentals.platform.time.IzTime._
+  // Place impls in a single object to avoid massive duplication of codec objects for all inheritors of IRTTimeInstances
+  implicit final def decodeInstant: Decoder[Instant] = IRTTimeInstances.decodeInstant
+  implicit final def encodeInstant: Encoder[Instant] = IRTTimeInstances.encodeInstant
+
+  implicit final def decodeZoneId: Decoder[ZoneId] = IRTTimeInstances.decodeZoneId
+  implicit final def encodeZoneId: Encoder[ZoneId] = IRTTimeInstances.encodeZoneId
+
+  final def decodeLocalDateTime(formatter: DateTimeFormatter): Decoder[LocalDateTime] = IRTTimeInstances.decodeLocalDateTime(formatter)
+  final def encodeLocalDateTime(formatter: DateTimeFormatter): Encoder[LocalDateTime] = IRTTimeInstances.encodeLocalDateTime(formatter)
+
+  implicit final def decodeLocalDateTimeDefault: Decoder[LocalDateTime] = IRTTimeInstances.decodeLocalDateTimeDefault
+  implicit final def encodeLocalDateTimeDefault: Encoder[LocalDateTime] = IRTTimeInstances.encodeLocalDateTimeDefault
+
+  final def decodeZonedDateTime(formatter: DateTimeFormatter): Decoder[ZonedDateTime] = IRTTimeInstances.decodeZonedDateTime(formatter)
+  final def encodeZonedDateTime(formatter: DateTimeFormatter): Encoder[ZonedDateTime] = IRTTimeInstances.encodeZonedDateTime(formatter)
+
+  implicit final def decodeZonedDateTimeDefault: Decoder[ZonedDateTime] = IRTTimeInstances.decodeZonedDateTimeDefault
+  implicit final def encodeZonedDateTimeDefault: Encoder[ZonedDateTime] = IRTTimeInstances.encodeZonedDateTimeDefault
+
+  final def decodeOffsetDateTime(formatter: DateTimeFormatter): Decoder[OffsetDateTime] = IRTTimeInstances.decodeOffsetDateTime(formatter)
+  final def encodeOffsetDateTime(formatter: DateTimeFormatter): Encoder[OffsetDateTime] = IRTTimeInstances.encodeOffsetDateTime(formatter)
+
+  implicit final def decodeOffsetDateTimeDefault: Decoder[OffsetDateTime] = IRTTimeInstances.decodeOffsetDateTimeDefault
+  implicit final def encodeOffsetDateTimeDefault: Encoder[OffsetDateTime] = IRTTimeInstances.encodeOffsetDateTimeDefault
+
+  final def decodeLocalDate(formatter: DateTimeFormatter): Decoder[LocalDate] =  IRTTimeInstances.decodeLocalDate(formatter)
+  final def encodeLocalDate(formatter: DateTimeFormatter): Encoder[LocalDate] = IRTTimeInstances.encodeLocalDate(formatter)
+
+  implicit final def decodeLocalDateDefault: Decoder[LocalDate] = IRTTimeInstances.decodeLocalDateDefault
+  implicit final def encodeLocalDateDefault: Encoder[LocalDate] = IRTTimeInstances.encodeLocalDateDefault
+
+  final def decodeLocalTime(formatter: DateTimeFormatter): Decoder[LocalTime] = IRTTimeInstances.decodeLocalTime(formatter)
+  final def encodeLocalTime(formatter: DateTimeFormatter): Encoder[LocalTime] = IRTTimeInstances.encodeLocalTime( formatter)
+
+  implicit final def decodeLocalTimeDefault: Decoder[LocalTime] = IRTTimeInstances.decodeLocalTimeDefault
+  implicit final def encodeLocalTimeDefault: Encoder[LocalTime] = IRTTimeInstances.encodeLocalTimeDefault
+
+  final def decodeOffsetTime(formatter: DateTimeFormatter): Decoder[OffsetTime] = IRTTimeInstances.decodeOffsetTime(formatter)
+  final def encodeOffsetTime(formatter: DateTimeFormatter): Encoder[OffsetTime] = IRTTimeInstances.encodeOffsetTime(formatter)
+
+  implicit final def decodeOffsetTimeDefault: Decoder[OffsetTime] = IRTTimeInstances.decodeOffsetTimeDefault
+  implicit final def encodeOffsetTimeDefault: Encoder[OffsetTime] = IRTTimeInstances.encodeOffsetTimeDefault
+
+  implicit final def decodePeriod: Decoder[Period] = IRTTimeInstances.decodePeriod
+  implicit final def encodePeriod: Encoder[Period] = IRTTimeInstances.encodePeriod
+
+  final def decodeYearMonth(formatter: DateTimeFormatter): Decoder[YearMonth] = IRTTimeInstances.decodeYearMonth(formatter)
+  final def encodeYearMonth(formatter: DateTimeFormatter): Encoder[YearMonth] = IRTTimeInstances.encodeYearMonth(formatter)
+
+  implicit final def decodeYearMonthDefault: Decoder[YearMonth] = IRTTimeInstances.decodeYearMonthDefault
+  implicit final def encodeYearMonthDefault: Encoder[YearMonth] = IRTTimeInstances.encodeYearMonthDefault
+
+  implicit final def decodeDuration: Decoder[Duration] = IRTTimeInstances.decodeDuration
+  implicit final def encodeDuration: Encoder[Duration] = IRTTimeInstances.encodeDuration
+}
+
+object IRTTimeInstances {
+  import izumi.fundamentals.platform.time.IzTime.*
 
   implicit final val decodeInstant: Decoder[Instant] =
     Decoder.instance { c =>
