@@ -125,7 +125,7 @@ object Idealingua {
   import Deps._
 
   // DON'T REMOVE, these variables are read from CI build (build.sh)
-  final val scala212 = ScalaVersion("2.12.14")
+  final val scala212 = ScalaVersion("2.12.15")
   final val scala213 = ScalaVersion("2.13.6")
 
   object Groups {
