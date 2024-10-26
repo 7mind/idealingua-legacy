@@ -9,7 +9,7 @@ cd $THISDIR
 rm -rf *.nupkg
 
 NUSPEC=irt.tmp.nuspec
-cat irt.nuspec | sed 's/0.0.1-UNSET/'${IZUMI_VERSION}'/g' > $NUSPEC
+cat irt.nuspec | sed 's/0.0.1-UNSET/'${IDEALINGUA_VERSION}'/g' > $NUSPEC
 cat $NUSPEC
 nuget pack $NUSPEC
 rm $NUSPEC

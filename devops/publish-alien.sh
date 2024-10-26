@@ -3,7 +3,8 @@
 set -e
 set -x
 
-source ./devops/.env.sh
+source ./devops/.env-basic.sh
+printenv
 
 [[ "$CI_PULL_REQUEST" != "false"  ]] && exit 0
 [[ -z "$TOKEN_NUGET" ]] && exit 0
