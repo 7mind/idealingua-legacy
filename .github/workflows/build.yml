@@ -29,6 +29,14 @@ jobs:
         scala: [ '2.12', '2.13', '3' ]
     steps:
       - uses: 7mind/github-env@minimal
+      - uses: actions/cache@v4
+        name: Cache (SBT, Ivy, Coursier)
+        with:
+          path: |
+            ~/.sbt
+            ~/.cache/coursier
+            ~/.ivy2/cache
+          key: ${{ runner.os }}-scala
       - name: Build and Test
         env:
           SCALA_VERSION: ${{ matrix.scala }}
@@ -83,6 +91,14 @@ jobs:
             994f97a2-97a4-4fe1-806a-b1930104435f > SONATYPE_CREDENTIALS_FILE
             749f4227-9f11-4ceb-9121-b1930110c3a9 > OPENSSL_KEY
             a2fe5b5b-5f3f-47f8-961c-b1930110cea7 > OPENSSL_IV
+      - uses: actions/cache@v4
+        name: Cache (SBT, Ivy, Coursier)
+        with:
+          path: |
+            ~/.sbt
+            ~/.cache/coursier
+            ~/.ivy2/cache
+          key: ${{ runner.os }}-scala
       - name: Build and Publish to Sonatype
         env:
           SONATYPE_SECRET: .secrets/credentials.sonatype-nexus.properties
@@ -95,7 +111,6 @@ jobs:
             echo "$SONATYPE_CREDENTIALS_FILE" > "$SONATYPE_SECRET"
             openssl aes-256-cbc -K ${OPENSSL_KEY} -iv ${OPENSSL_IV} -in secrets.tar.enc -out secrets.tar -d
             tar xvf secrets.tar
-            ls -la .secrets/
           fi        
           ./build.sh nix gen publish-scala
 
