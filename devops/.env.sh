@@ -8,7 +8,7 @@ export SCALA212=$(cat project/Deps.sc | grep 'val scala212 ' |  sed -r 's/.*\"(.
 export SCALA213=$(cat project/Deps.sc | grep 'val scala213 ' |  sed -r 's/.*\"(.*)\".**/\1/')
 export SCALA3=$(cat project/Deps.sc | grep 'val scala300 ' |  sed -r 's/.*\"(.*)\".**/\1/')
 
-[[ -z "$SCALA_VERSION" ]] && exit 1
+[[ -z "$SCALA_VERSION" ]] && echo "Missing SCALA_VERSION" && exit 1
 
 case $SCALA_VERSION in
   2.12) SCALA_VERSION="$SCALA212" ;;

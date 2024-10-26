@@ -6,10 +6,10 @@ set -x
 source ./devops/.env-basic.sh
 printenv
 
-[[ "$CI_PULL_REQUEST" != "false"  ]] && exit 0
-[[ -z "$TOKEN_NUGET" ]] && exit 0
-[[ -z "$TOKEN_NPM" ]] && exit 0
-[[ ! ("$CI_BRANCH" == "develop" || "$CI_BRANCH_TAG" =~ ^v.*$ ) ]] && exit 0
+source ./devops/.validate-publishing.sh
+
+[[ -z "$TOKEN_NUGET" ]] && echo "Missing TOKEN_NUGET" && exit 0
+[[ -z "$TOKEN_NPM" ]] && echo "Missing TOKEN_NPM" && exit 0
 
 
 echo "PUBLISH IDL RUNTIMES..."

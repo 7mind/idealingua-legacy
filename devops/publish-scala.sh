@@ -4,10 +4,11 @@ set -e
 set -x
 
 source ./devops/.env.sh
+printenv
 
-[[ "$CI_PULL_REQUEST" != "false"  ]] && exit 0
-[[ ! ("$CI_BRANCH" == "develop" || "$CI_BRANCH_TAG" =~ ^v.*$ ) ]] && exit 0
-[[ -f "$SONATYPE_SECRET"]] && exit 0
+source ./devops/.validate-publishing.sh
+
+[[ -f "$SONATYPE_SECRET" ]] && echo "Missing SONATYPE_SECRET=$SONATYPE_SECRET is not a file" && exit 0
 
 
 echo "PUBLISH SCALA LIBRARIES..."
