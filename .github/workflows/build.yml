@@ -25,22 +25,13 @@ jobs:
     needs: [ 'checksecret' ]
     strategy:
       matrix:
-        java: [ '11' ]
         scala: [ '2.12', '2.13', '3' ]
     steps:
-      - uses: 7mind/github-env@main
-        with:
-          java-version: ${{ matrix.java }}
-#      - uses: actions/setup-go@v5
-#        with:
-#          go-version: '1.21.4' # The Go version to download (if necessary) and use.
-      - uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: 6.x
+      - uses: 7mind/github-env@minimal
       - name: Build and Test
-        run: |
-          bash sbtgen.sc --js
-          bash .build.sh ${{ matrix.scala }} coverage
+        env:
+          SCALA_VERSION: ${{ matrix.scala }}
+        run: ./build.sh nix gen coverage
       - uses: bitwarden/sm-action@v2
         if: needs.checksecret.outputs.HAVE_SECRETS == 'true'
         with:
@@ -57,14 +48,13 @@ jobs:
           # TODO: do we need scoverage.xml? If so files: may be just omitted
           # files: cobertura.xml,scoverage.xml
           # flags: unittests
+
   publish-alien:
     runs-on: ubuntu-latest
     needs: [ 'checksecret' ]
     if: needs.checksecret.outputs.HAVE_SECRETS == 'true'
     steps:
-      - uses: 7mind/github-env@main
-        with:
-          java-version: 11
+      - uses: 7mind/github-env@minimal
       - uses: bitwarden/sm-action@v2
         with:
           access_token: ${{ secrets.TOKEN_BITWARDEN_SM }}
@@ -72,15 +62,14 @@ jobs:
             637c5cad-a680-4ea3-ac8b-b193010bee40 > TOKEN_NUGET
             aa0a790c-4030-4126-bc77-b193010a0f04 > TOKEN_NPM
       - name: Publish alien artifacts
-        run: |
-          bash .build.sh 2.12 publishIDL
+        run: ./build.sh nix publish-alien
+
   publish-artifacts:
     runs-on: ubuntu-latest
     needs: [ 'build', 'checksecret' ]
     if: needs.checksecret.outputs.HAVE_SECRETS == 'true'
     strategy:
       matrix:
-        java: [ '11' ]
         scala: [ '2.12', '2.13', '3' ]
     steps:
       - uses: 7mind/github-env@main
@@ -94,9 +83,17 @@ jobs:
             749f4227-9f11-4ceb-9121-b1930110c3a9 > OPENSSL_KEY
             a2fe5b5b-5f3f-47f8-961c-b1930110cea7 > OPENSSL_IV
       - name: Build and Publish to Sonatype
+        env:
+          SONATYPE_SECRET: .secrets/credentials.sonatype-nexus.properties
         run: |
-          bash sbtgen.sc --js
-          bash .build.sh ${{ matrix.scala }} secrets publishScala
+          if [[ "$CI_PULL_REQUEST" == "false"  ]] ; then
+            mkdir .secrets
+            echo "$SONATYPE_CREDENTIALS_FILE" > "$SONATYPE_SECRET"
+            openssl aes-256-cbc -K ${OPENSSL_KEY} -iv ${OPENSSL_IV} -in secrets.tar.enc -out secrets.tar -d
+            tar xvf secrets.tar
+          fi        
+          ./build.sh nix gen publish-scala
+
   all-good:
     if: always()
     runs-on: ubuntu-latest
