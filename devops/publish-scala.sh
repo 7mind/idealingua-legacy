@@ -8,7 +8,7 @@ printenv
 
 source ./devops/.validate-publishing.sh
 
-[[ -f "$SONATYPE_SECRET" ]] && echo "Missing SONATYPE_SECRET=$SONATYPE_SECRET is not a file" && exit 0
+[[ ! -f "$SONATYPE_SECRET" ]] && echo "SONATYPE_SECRET=$SONATYPE_SECRET is not a file" && exit 0
 
 
 echo "PUBLISH SCALA LIBRARIES..."
