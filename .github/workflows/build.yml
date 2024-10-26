@@ -74,9 +74,7 @@ jobs:
       matrix:
         scala: [ '2.12', '2.13', '3' ]
     steps:
-      - uses: 7mind/github-env@main
-        with:
-          java-version: ${{ matrix.java }}
+      - uses: 7mind/github-env@minimal
       - uses: bitwarden/sm-action@v2
         with:
           access_token: ${{ secrets.TOKEN_BITWARDEN_SM }}
