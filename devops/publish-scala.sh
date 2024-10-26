@@ -15,7 +15,7 @@ source ./devops/.env.sh
 echo "PUBLISH SCALA LIBRARIES..."
 
 if [[ "$CI_BRANCH" == "develop" ]] ; then
-  sbt -batch -no-colors -v "'$VERSION_COMMAND clean'" "'$VERSION_COMMAND package'" "'$VERSION_COMMAND publishSigned'"
+  sbt -batch -no-colors -v "$VERSION_COMMAND clean" "$VERSION_COMMAND package" "$VERSION_COMMAND publishSigned"
 else
-  sbt -batch -no-colors -v "'$VERSION_COMMAND clean'" "'$VERSION_COMMAND package'" "'$VERSION_COMMAND publishSigned'" sonatypeBundleRelease || exit 1
+  sbt -batch -no-colors -v "$VERSION_COMMAND clean" "$VERSION_COMMAND package" "$VERSION_COMMAND publishSigned" sonatypeBundleRelease || exit 1
 fi
