@@ -85,6 +85,7 @@ jobs:
       - name: Build and Publish to Sonatype
         env:
           SONATYPE_SECRET: .secrets/credentials.sonatype-nexus.properties
+          SCALA_VERSION: ${{ matrix.scala }}
         run: |
           if [[ "$CI_PULL_REQUEST" == "false"  ]] ; then
             mkdir .secrets
