@@ -20,30 +20,8 @@
         devShells.default = pkgs.mkShell {
           nativeBuildInputs = with pkgs.buildPackages; [
             ncurses
-            #graalvm-ce
-
-            # https://github.com/NixOS/nixpkgs/issues/350909
-            (graalvm-ce.overrideDerivation (oldAttrs: {
-
-              postInstall =
-                let
-                  darwinArgs = pkgs.lib.optionals stdenv.hostPlatform.isDarwin [
-                    "-ENIX_BINTOOLS"
-                    "-ENIX_CC"
-                    "-ENIX_CFLAGS_COMPILE"
-                    "-ENIX_LDFLAGS"
-                    "-ENIX_CC_WRAPPER_TARGET_HOST_${pkgs.stdenv.cc.suffixSalt}"
-                    "-ENIX_BINTOOLS_WRAPPER_TARGET_HOST_${pkgs.stdenv.cc.suffixSalt}"
-                  ];
-
-                  darwinFlags = (map (f: "--add-flags '${f}'") darwinArgs);
-                in
-
-                pkgs.lib.replaceStrings [ "/bin/native-image" ] [
-                  "/bin/native-image ${toString (darwinFlags)}"
-                ] oldAttrs.postInstall;
-            }))
-
+            graalvm-ce
+            coursier
             sbt
             dotnet-sdk_6
           ];
