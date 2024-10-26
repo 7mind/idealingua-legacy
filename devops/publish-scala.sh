@@ -6,8 +6,6 @@ set -x
 source ./devops/.env.sh
 
 [[ "$CI_PULL_REQUEST" != "false"  ]] && exit 0
-[[ -z "$TOKEN_NUGET" ]] && exit 0
-[[ -z "$TOKEN_NPM" ]] && exit 0
 [[ ! ("$CI_BRANCH" == "develop" || "$CI_BRANCH_TAG" =~ ^v.*$ ) ]] && exit 0
 [[ -f "$SONATYPE_SECRET"]] && exit 0
 
