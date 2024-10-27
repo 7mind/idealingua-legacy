@@ -35,7 +35,7 @@ for i in "$@"
 do
 case $i in
     nix) ;;
-    env) exec sh ;;
+    env) exec bash -norc ;;
     *) "./devops/$i.sh" ;;
 esac
 done
