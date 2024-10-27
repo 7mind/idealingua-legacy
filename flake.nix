@@ -20,10 +20,19 @@
         devShells.default = pkgs.mkShell {
           nativeBuildInputs = with pkgs.buildPackages; [
             ncurses
+
             graalvm-ce
             coursier
             sbt
+
             dotnet-sdk_6
+            mono
+            msbuild
+            dotnetPackages.NUnitConsole
+            dotnetPackages.Nuget
+
+            protobuf
+
             nodejs
             nodePackages.npm
             typescript
