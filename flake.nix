@@ -27,6 +27,7 @@
             nodejs
             nodePackages.npm
             typescript
+            dotnetPackages.Nuget
           ];
         };
       }
