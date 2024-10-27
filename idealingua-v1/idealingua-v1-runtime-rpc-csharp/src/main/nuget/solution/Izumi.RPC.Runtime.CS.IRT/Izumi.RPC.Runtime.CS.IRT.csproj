@@ -13,6 +13,24 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+
+
+    <PackageId>Izumi.RPC.Runtime.CS</PackageId>
+    <Authors>Septimal Mind</Authors>
+    <Company>Septimal Mind Ltd</Company>
+    <Product>Idealingua-v1</Product>
+    <PackageTags>IDL;RPC;7mind</PackageTags>
+    <IsPackable>true</IsPackable>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <Description>
+
+    </Description>
   </PropertyGroup>
 
   <ItemGroup>

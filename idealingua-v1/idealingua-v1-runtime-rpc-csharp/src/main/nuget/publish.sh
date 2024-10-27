@@ -1,24 +1,23 @@
 #!/usr/bin/env bash
 set -xe
 
-export THISDIR="$( cd "$(dirname "$0")" ; pwd -P )"
+THISDIR="$( cd "$(dirname "$0")" ; pwd -P )"
 
 pushd .
 cd $THISDIR
 
 rm -rf *.nupkg
 
-NUSPEC=irt.tmp.nuspec
-cat irt.nuspec | sed 's/0.0.1-UNSET/'${IDEALINGUA_VERSION}'/g' > $NUSPEC
-cat $NUSPEC
-nuget pack $NUSPEC
-rm $NUSPEC
+[[ "$CI_PULL_REQUEST" != "false"  ]] && exit 0
+[[ -z "$TOKEN_NUGET" ]] && exit 0
+[[ -z "$CI_BUILD_UNIQ_SUFFIX" ]] && exit 0
 
-#nuget setapikey $TOKEN_NUGET
+if [[ "$CI_BRANCH_TAG" =~ ^v.*$ ]] ; then
+    dotnet build -c Release
+else
+    dotnet build -c Release --version-suffix "alpha.${CI_BUILD_UNIQ_SUFFIX}"
+fi
 
-for TRG in $(find . -name '*.nupkg' -type f -print)
-do
-    dotnet nuget push $TRG -k $TOKEN_NUGET --source https://api.nuget.org/v3/index.json || exit 1
-done
+find . -name '*.nupkg' -type f -exec dotnet nuget push {} -k "${TOKEN_NUGET}" --source https://api.nuget.org/v3/index.json \;
 
 popd
