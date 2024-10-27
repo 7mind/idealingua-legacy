@@ -17,6 +17,8 @@ if [[ "$NIXIFY" == 1 && -z "${IN_NIX_SHELL+x}" ]]; then
       --keep SONATYPE_SECRET \
       --keep SCALA_VERSION \
       --keep TOKEN_BITWARDEN_SM \
+      --keep TOKEN_NUGET \
+      --keep TOKEN_NPM \
       --keep CI_BRANCH \
       --keep CI_COMMIT \
       --keep CI_BRANCH_TAG \
