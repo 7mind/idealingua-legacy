@@ -23,6 +23,7 @@ if [[ "$NIXIFY" == 1 && -z "${IN_NIX_SHELL+x}" ]]; then
       --keep CI_PULL_REQUEST \
       --keep CI_BUILD_UNIQ_SUFFIX \
       --keep CI \
+      --keep HOME \
       --command bash "$self" "$@"
 fi
 
