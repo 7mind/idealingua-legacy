@@ -16,7 +16,6 @@ if [[ "$NIXIFY" == 1 && -z "${IN_NIX_SHELL+x}" ]]; then
       --ignore-environment \
       --keep SONATYPE_SECRET \
       --keep SCALA_VERSION \
-      --keep TOKEN_BITWARDEN_SM \
       --keep TOKEN_NUGET \
       --keep TOKEN_NPM \
       --keep CI_BRANCH \
