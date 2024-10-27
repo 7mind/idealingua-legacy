@@ -26,6 +26,7 @@
             dotnet-sdk_6
             nodejs
             nodePackages.npm
+            typescript
           ];
         };
       }
