@@ -50,7 +50,23 @@ jobs:
           # files: cobertura.xml,scoverage.xml
           # flags: unittests
 
-  publish-alien:
+  publish-npm:
+    runs-on: ubuntu-latest
+    needs: [ 'checksecret' ]
+    if: needs.checksecret.outputs.HAVE_SECRETS == 'true'
+    steps:
+      - uses: 7mind/github-env@minimal
+        with:
+          cache-scala: false
+      - uses: bitwarden/sm-action@v2
+        with:
+          access_token: ${{ secrets.TOKEN_BITWARDEN_SM }}
+          secrets: |
+            aa0a790c-4030-4126-bc77-b193010a0f04 > TOKEN_NPM
+      - name: Publish NPM artifacts
+        run: ./build.sh nix publish-npm
+
+  publish-nuget:
     runs-on: ubuntu-latest
     needs: [ 'checksecret' ]
     if: needs.checksecret.outputs.HAVE_SECRETS == 'true'
@@ -63,9 +79,8 @@ jobs:
           access_token: ${{ secrets.TOKEN_BITWARDEN_SM }}
           secrets: |
             637c5cad-a680-4ea3-ac8b-b193010bee40 > TOKEN_NUGET
-            aa0a790c-4030-4126-bc77-b193010a0f04 > TOKEN_NPM
-      - name: Publish alien artifacts
-        run: ./build.sh nix publish-alien
+      - name: Publish Nuget artifacts
+        run: ./build.sh nix publish-nuget
 
   publish-scala:
     runs-on: ubuntu-latest

@@ -35,7 +35,7 @@
 
   <ItemGroup>
     <Reference Include="System.Web" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.102.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="NUnit" Version="3.11.0" />
     <PackageReference Include="Unity3D.UnityEngine" Version="2018.1.6-f1" />
     <PackageReference Include="Unity3D.UnityEngine.Networking" Version="2018.1.6-f1" />
@@ -47,6 +47,7 @@
       <Pack>true</Pack>
       <PackagePath>$(ContentTargetFolders)/cs/any/%(RecursiveDir)%(Filename)%(Extension)</PackagePath>
     </Compile>
+    <None Include="README.md" Pack="true" PackagePath="\" />
     <!--EmbeddedResource Update="@(EmbeddedResource)">
       <Pack>true</Pack>
       <PackagePath>$(ContentTargetFolders)/any/any/$(PackageId)/%(RecursiveDir)</PackagePath>
