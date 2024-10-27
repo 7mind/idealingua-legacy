@@ -6,10 +6,10 @@
   inputs.flake-utils.url = "github:numtide/flake-utils";
 
   outputs =
-    {
-      self,
-      nixpkgs,
-      flake-utils,
+    { self
+    , nixpkgs
+    , flake-utils
+    ,
     }:
     flake-utils.lib.eachDefaultSystem (
       system:
@@ -24,6 +24,8 @@
             coursier
             sbt
             dotnet-sdk_6
+            nodejs
+            nodePackages.npm
           ];
         };
       }
