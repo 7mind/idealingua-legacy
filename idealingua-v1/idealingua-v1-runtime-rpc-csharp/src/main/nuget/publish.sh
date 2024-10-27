@@ -4,7 +4,7 @@ set -xe
 THISDIR="$( cd "$(dirname "$0")" ; pwd -P )"
 
 pushd .
-cd $THISDIR
+cd $THISDIR/solution
 
 rm -rf *.nupkg
 
