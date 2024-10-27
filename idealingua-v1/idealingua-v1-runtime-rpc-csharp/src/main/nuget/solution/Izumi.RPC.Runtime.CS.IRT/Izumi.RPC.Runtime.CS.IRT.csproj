@@ -2,17 +2,21 @@
   <!-- https://medium.com/@attilah/source-code-only-nuget-packages-8f34a8fb4738 -->
   
   <PropertyGroup>
-    <TargetFramework>net461</TargetFramework>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <!--TargetFramework>net461</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild-->
     <PackageVersion>0.0.1-build.0</PackageVersion>
     <DefineConstants>UNITY_5_3_OR_NEWER</DefineConstants>
 
-    <IsPackable>true</IsPackable>
+    <OutputType>Library</OutputType>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>9</LangVersion>
+
+    <!--IsPackable>true</IsPackable>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <ContentTargetFolders>contentFiles</ContentTargetFolders>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild-->
 
 
     <PackageId>Izumi.RPC.Runtime.CS</PackageId>
