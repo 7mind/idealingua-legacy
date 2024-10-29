@@ -374,7 +374,7 @@ object IDLTestTools {
       "#!/usr/bin/env bash",
       "set -xe",
       s"cd ${workDir.toAbsolutePath}",
-    ) ++ env.map(kv => s"export ${kv._1}=${kv._2}") ++ Seq("env") ++ Seq(cmd.mkString("", " \\\n  ", "\n"))
+    ) ++ env.map(kv => s"export ${kv._1}=${kv._2}") ++ Seq("env") ++ Seq(cmd.map(s => s"\"$s\"").mkString("", " \\\n  ", "\n"))
 
     val cmdSh = commands.mkString("\n")
 
