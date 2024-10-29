@@ -157,7 +157,7 @@ object IDLTestTools {
       flags ++
       Seq(
         "-classpath",
-        scp,
+        "\"" + scp + "\"",
       ) ++ out.relativeOutputs.filter(_.endsWith(".scala")).map(t => s"'$t'")
 
     dcp
@@ -311,7 +311,7 @@ object IDLTestTools {
     val jOut     = out.absoluteTargetDir.resolve("java_output")
     jOut.toFile.mkdirs()
 
-    val cmdBuild      = Seq("protoc", s"--java_out=$jOut", "$(find ./ -iname \"*.proto\")")
+    val cmdBuild      = Seq("protoc", s"--java_out=$jOut", "$(find ./ -iname '*.proto')")
     val exitCodeBuild = run(protoSrc, cmdBuild, Map.empty, "proto-build")
 
     exitCodeBuild == 0
@@ -374,7 +374,7 @@ object IDLTestTools {
       "#!/usr/bin/env bash",
       "set -xe",
       s"cd ${workDir.toAbsolutePath}",
-    ) ++ env.map(kv => s"export ${kv._1}=${kv._2}") ++ Seq("env") ++ Seq(cmd.map(s => "\"" + s + "\"").mkString("", " \\\n  ", "\n"))
+    ) ++ env.map(kv => s"export ${kv._1}=${kv._2}") ++ Seq("env") ++ Seq(cmd.mkString("", " \\\n  ", "\n"))
 
     val cmdSh = commands.mkString("\n")
 
