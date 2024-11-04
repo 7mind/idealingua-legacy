@@ -32,7 +32,7 @@ jobs:
       - name: Build and Test
         env:
           SCALA_VERSION: ${{ matrix.scala }}
-        run: ./build.sh nix gen coverage
+        run: ./build.sh nix gen coverage test-scala test-cs test-ts test-pb
       - uses: bitwarden/sm-action@v2
         if: needs.checksecret.outputs.HAVE_SECRETS == 'true'
         with:

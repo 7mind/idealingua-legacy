@@ -11,7 +11,7 @@ function test_pb_prj() {
   testname="$(basename $1)"
   tmpdir="$(mktemp -d -t "$testname".XXXXXXXX)"
 
-  sbt "++ 2.13; idealingua-v1-compiler/run --root=$1 --source=$1/source --overlay=$1/overlay --target=$tmpdir :protobuf"
+  sbt "$VERSION_COMMAND ; idealingua-v1-compiler/run --root=$1 --source=$1/source --overlay=$1/overlay --target=$tmpdir :protobuf"
 
   pushd .
   cd $tmpdir/protobuf

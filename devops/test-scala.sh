@@ -13,7 +13,7 @@ function test_sbt_prj() {
   testname="$(basename $1)"
   tmpdir="$(mktemp -d -t "$testname".XXXXXXXX)"
 
-  sbt "++ 2.13; idealingua-v1-compiler/run --root=$1 --source=$1/source --overlay=$1/overlay --target=$tmpdir :scala -d layout=SBT"
+  sbt "$VERSION_COMMAND ; idealingua-v1-compiler/run --root=$1 --source=$1/source --overlay=$1/overlay --target=$tmpdir :scala -d layout=SBT"
 
   pushd .
   cd $tmpdir/scala
@@ -28,7 +28,7 @@ function test_plain_prj() {
   testname="$(basename $1)"
   tmpdir="$(mktemp -d -t "$testname".XXXXXXXX)"
 
-  sbt "++ 2.13; idealingua-v1-compiler/run --root=$1 --source=$1/source --overlay=$1/overlay --target=$tmpdir :scala -d layout=PLAIN"
+  sbt "$VERSION_COMMAND ; idealingua-v1-compiler/run --root=$1 --source=$1/source --overlay=$1/overlay --target=$tmpdir :scala -d layout=PLAIN"
 
   pushd .
   cd $tmpdir/scala
