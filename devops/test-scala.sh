@@ -6,7 +6,7 @@ set -x
 source ./devops/.env.sh
 printenv
 
-classpath="$(TERM=dumb sbt --batch --error "++ 2.13; export idealingua-v1-compiler/runtime:fullClasspath")"
+classpath="$(TERM=dumb sbt --batch --error "$VERSION_COMMAND ; export idealingua-v1-compiler/runtime:fullClasspath")"
 
 function test_sbt_prj() {
   echo "IDL TEST ABOUT TO START: $1"
