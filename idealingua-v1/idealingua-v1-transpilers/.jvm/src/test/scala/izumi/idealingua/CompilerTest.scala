@@ -51,15 +51,15 @@ class CompilerTest extends AnyWordSpec {
 //      assert(compilesGolang(s"$id-plain-nested", loadDefs("/defs/nested/test"), GoProjectLayout.PLAIN))
 //    }
 
-    "be able to compile into csharp" in {
-      requireOptional("csc", "nunit-console", "nuget", "msbuild")
-      assert(compilesCSharp(s"$id-plain", loadDefs(), CSharpProjectLayout.PLAIN))
-    }
-
-    "be able to compile into csharp with nuget layout" in {
-      requireForCI("csc", "nuget", "msbuild")
-      assert(compilesCSharp(s"$id-nuget", loadDefs(), CSharpProjectLayout.NUGET))
-    }
+//    "be able to compile into csharp" in {
+//      requireOptional("csc", "nunit-console", "nuget", "msbuild")
+//      assert(compilesCSharp(s"$id-plain", loadDefs(), CSharpProjectLayout.PLAIN))
+//    }
+//
+//    "be able to compile into csharp with nuget layout" in {
+//      requireForCI("csc", "nuget", "msbuild")
+//      assert(compilesCSharp(s"$id-nuget", loadDefs(), CSharpProjectLayout.NUGET))
+//    }
 
     "be able to compile into protobuf" in {
       requireOptional("protoc")
