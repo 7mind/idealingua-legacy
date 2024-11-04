@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-
-set -e
-set -x
+set -xeuo pipefail
 
 bash sbtgen.sc --js

@@ -1,10 +1,7 @@
 #!/usr/bin/env bash
-
-set -e
-set -x
+set -xeuo pipefail
 
 source ./devops/.env.sh
-printenv
 
 function test_yarn_prj() {
   echo "IDL TEST ABOUT TO START: $1"

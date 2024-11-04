@@ -1,10 +1,7 @@
 #!/usr/bin/env bash
-
-set -e
-set -x
+set -xeuo pipefail
 
 source ./devops/.env.sh
-printenv
 
 classpath="$(TERM=dumb sbt --batch --error "$VERSION_COMMAND ; export idealingua-v1-compiler/runtime:fullClasspath")"
 

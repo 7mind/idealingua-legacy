@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
-
-set -e
-set -x
+set -xeuo pipefail
 
 source ./devops/.env.sh
 printenv
