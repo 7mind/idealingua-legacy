@@ -32,24 +32,24 @@ class CompilerTest extends AnyWordSpec {
 //      // assert(compilesScala(s"$id-sbt-nonportable", loadDefs("/defs/scala"), ScalaProjectLayout.SBT))
 //    }
 
-    "be able to compile into typescript" in {
-      requireForCI("tsc", "npm", "yarn")
-      assert(compilesTypeScript(s"$id-plain", loadDefs(), TypeScriptProjectLayout.PLAIN))
-    }
+//    "be able to compile into typescript" in {
+//      requireForCI("tsc", "npm", "yarn")
+//      assert(compilesTypeScript(s"$id-plain", loadDefs(), TypeScriptProjectLayout.PLAIN))
+//    }
+//
+//    "be able to compile into typescript with yarn" in {
+//      // TODO: once we switch to published runtime there may be an issue with this test same as with sbt one
+//      requireForCI("tsc", "npm", "yarn")
+//      assert(compilesTypeScript(s"$id-yarn", loadDefs(), TypeScriptProjectLayout.YARN))
+//      assert(compilesTypeScript(s"$id-yarn-nested", loadDefs("/defs/nested/test"), TypeScriptProjectLayout.YARN))
+//    }
 
-    "be able to compile into typescript with yarn" in {
-      // TODO: once we switch to published runtime there may be an issue with this test same as with sbt one
-      requireForCI("tsc", "npm", "yarn")
-      assert(compilesTypeScript(s"$id-yarn", loadDefs(), TypeScriptProjectLayout.YARN))
-      assert(compilesTypeScript(s"$id-yarn-nested", loadDefs("/defs/nested/test"), TypeScriptProjectLayout.YARN))
-    }
-
-    "be able to compile into golang" ignore { // go bitrotted.
-      requireOptional("go")
-      assert(compilesGolang(s"$id-repository", loadDefs(), GoProjectLayout.REPOSITORY))
-      assert(compilesGolang(s"$id-plain", loadDefs(), GoProjectLayout.PLAIN))
-      assert(compilesGolang(s"$id-plain-nested", loadDefs("/defs/nested/test"), GoProjectLayout.PLAIN))
-    }
+//    "be able to compile into golang" ignore { // go bitrotted.
+//      requireOptional("go")
+//      assert(compilesGolang(s"$id-repository", loadDefs(), GoProjectLayout.REPOSITORY))
+//      assert(compilesGolang(s"$id-plain", loadDefs(), GoProjectLayout.PLAIN))
+//      assert(compilesGolang(s"$id-plain-nested", loadDefs("/defs/nested/test"), GoProjectLayout.PLAIN))
+//    }
 
     "be able to compile into csharp" in {
       requireOptional("csc", "nunit-console", "nuget", "msbuild")

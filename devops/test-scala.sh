@@ -6,6 +6,8 @@ set -x
 source ./devops/.env.sh
 printenv
 
+classpath="$(TERM=dumb sbt --batch --error "++ 2.13; export idealingua-v1-compiler/runtime:fullClasspath")"
+
 function test_sbt_prj() {
   echo "IDL TEST ABOUT TO START: $1"
   testname="$(basename $1)"
@@ -28,7 +30,6 @@ function test_plain_prj() {
 
   sbt "++ 2.13; idealingua-v1-compiler/run --root=$1 --source=$1/source --overlay=$1/overlay --target=$tmpdir :scala -d layout=PLAIN"
 
-  classpath="$(TERM=dumb sbt --batch --error "++ 2.13; export idealingua-v1-compiler/runtime:fullClasspath")"
   pushd .
   cd $tmpdir/scala
   files=$(find . -name '*.scala' -print0 | xargs -0)
@@ -49,10 +50,11 @@ function test_plain_prj() {
 }
 
 find ./idealingua-v1/idealingua-v1-test-defs/src/main/resources/defs -maxdepth 1 -mindepth 1  -type d | while IFS= read -r file; do
-    test_sbt_prj "$file"
+  test_sbt_prj "$file"
+  test_plain_prj "$file"
 done
 
 
 find ./idealingua-v1/idealingua-v1-test-defs/src/main/resources/defs-special -name 'scala-*' -maxdepth 1 -mindepth 1  -type d | while IFS= read -r file; do
-    test_plain_prj "$file"
+  test_plain_prj "$file"
 done
