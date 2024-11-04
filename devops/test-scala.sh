@@ -48,9 +48,9 @@ function test_plain_prj() {
   echo "IDL TEST DONE: $1"
 }
 
-#find ./idealingua-v1/idealingua-v1-test-defs/src/main/resources/defs -maxdepth 1 -mindepth 1  -type d | while IFS= read -r file; do
-#    test_sbt_prj "$file"
-#done
+find ./idealingua-v1/idealingua-v1-test-defs/src/main/resources/defs -maxdepth 1 -mindepth 1  -type d | while IFS= read -r file; do
+    test_sbt_prj "$file"
+done
 
 
 find ./idealingua-v1/idealingua-v1-test-defs/src/main/resources/defs-special -name 'scala-*' -maxdepth 1 -mindepth 1  -type d | while IFS= read -r file; do

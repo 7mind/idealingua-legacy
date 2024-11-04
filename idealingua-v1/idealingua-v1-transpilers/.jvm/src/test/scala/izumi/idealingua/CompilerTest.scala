@@ -14,23 +14,23 @@ class CompilerTest extends AnyWordSpec {
   "IDL compiler" should {
     val id = getClass.getSimpleName
 
-    "be able to compile into scala" in {
-      if (!useDockerForLocalScalaTest) {
-        requireForCI("cs")
-      }
-
+//    "be able to compile into scala" in {
+//      if (!useDockerForLocalScalaTest) {
+//        requireForCI("cs")
+//      }
+//
 //      assert(compilesScala(s"$id-plain", loadDefs(), ScalaProjectLayout.PLAIN, useDockerForLocalScalaTest))
-      assert(compilesScala(s"$id-plain-nested", loadDefs("/defs/subdir/source"), ScalaProjectLayout.PLAIN, useDockerForLocalScalaTest))
+//      assert(compilesScala(s"$id-plain-nested", loadDefs("/defs/subdir/source"), ScalaProjectLayout.PLAIN, useDockerForLocalScalaTest))
 //      assert(compilesScala(s"$id-plain-nonportable", loadDefs("/defs/scala"), ScalaProjectLayout.PLAIN, useDockerForLocalScalaTest))
-    }
-
-    "be able to compile into scala with SBT" ignore {
-      requireForCI("sbt")
-      // we can't test sbt build: it depends on artifacts which may not exist yet
-      assert(compilesScala(s"$id-sbt", loadDefs(), ScalaProjectLayout.SBT, useDockerForLocalScalaTest))
-      // circular sbt projects are broken in V1
-      // assert(compilesScala(s"$id-sbt-nonportable", loadDefs("/defs/scala"), ScalaProjectLayout.SBT))
-    }
+//    }
+//
+//    "be able to compile into scala with SBT" ignore {
+//      requireForCI("sbt")
+//      // we can't test sbt build: it depends on artifacts which may not exist yet
+//      assert(compilesScala(s"$id-sbt", loadDefs(), ScalaProjectLayout.SBT, useDockerForLocalScalaTest))
+//      // circular sbt projects are broken in V1
+//      // assert(compilesScala(s"$id-sbt-nonportable", loadDefs("/defs/scala"), ScalaProjectLayout.SBT))
+//    }
 
     "be able to compile into typescript" in {
       requireForCI("tsc", "npm", "yarn")
