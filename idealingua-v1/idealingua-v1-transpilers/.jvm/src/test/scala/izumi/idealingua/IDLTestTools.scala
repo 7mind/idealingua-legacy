@@ -378,6 +378,7 @@ object IDLTestTools {
 
     val cmdSh = commands.mkString("\n")
 
+    println(cmdSh)
     Files.write(cmdscript, cmdSh.getBytes)
 
     val log = workDir.getParent.resolve(s"$cname.log").toFile

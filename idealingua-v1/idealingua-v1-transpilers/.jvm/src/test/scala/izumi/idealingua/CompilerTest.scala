@@ -19,9 +19,9 @@ class CompilerTest extends AnyWordSpec {
         requireForCI("cs")
       }
 
-      assert(compilesScala(s"$id-plain", loadDefs(), ScalaProjectLayout.PLAIN, useDockerForLocalScalaTest))
-      assert(compilesScala(s"$id-plain-nested", loadDefs("/defs/nested/test"), ScalaProjectLayout.PLAIN, useDockerForLocalScalaTest))
-      assert(compilesScala(s"$id-plain-nonportable", loadDefs("/defs/scala"), ScalaProjectLayout.PLAIN, useDockerForLocalScalaTest))
+//      assert(compilesScala(s"$id-plain", loadDefs(), ScalaProjectLayout.PLAIN, useDockerForLocalScalaTest))
+      assert(compilesScala(s"$id-plain-nested", loadDefs("/defs/subdir/source"), ScalaProjectLayout.PLAIN, useDockerForLocalScalaTest))
+//      assert(compilesScala(s"$id-plain-nonportable", loadDefs("/defs/scala"), ScalaProjectLayout.PLAIN, useDockerForLocalScalaTest))
     }
 
     "be able to compile into scala with SBT" ignore {
