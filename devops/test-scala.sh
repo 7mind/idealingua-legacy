@@ -37,7 +37,7 @@ function test_plain_prj() {
   mkdir ./target
   cs \
     launch \
-    scalac:"${SCALA213}" \
+    scalac:"${SCALA_VERSION}" \
     -- \
     -deprecation \
     -opt-warnings:_ \
