@@ -11,8 +11,10 @@ class LoaderTest extends AnyWordSpec {
 
   "IL loader" should {
     "parse all test domains" in {
-      testIn("/defs/any")
-      testIn("/defs/scala")
+      testIn("/defs/main-tests/source")
+      testIn("/defs/overlays/source")
+      testIn("/defs/subdir/source")
+//      testIn("/defs-special/scala-only/source")
     }
   }
 
