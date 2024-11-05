@@ -18,11 +18,13 @@ Describe 'CS transpiler'
     When call test_cs_msbuild_prj "$1"
     The status should be success
     The output should match pattern '*'
+    The stderr should match pattern '*'
   End
 
   It "builds CS Nuget project in $1"
     When call test_cs_plain_prj "$1"
     The status should be success
     The output should match pattern '*'
+    The stderr should match pattern '*'
   End
 End

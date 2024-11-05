@@ -11,11 +11,13 @@ Describe 'Typescript transpiler'
     When call test_ts_yarn_prj "$1"
     The status should be success
     The output should match pattern '*'
+    The stderr should match pattern '*'
   End
 
   It "builds Typescript Plain project in $1"
     When call test_ts_plain_prj "$1"
     The status should be success
     The output should match pattern '*'
+    The stderr should match pattern '*'
   End
 End
