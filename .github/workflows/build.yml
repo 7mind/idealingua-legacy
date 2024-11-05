@@ -55,13 +55,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        test: [ 'test-scala', 'test-cs', 'test-ts', 'test-pb' ]
         scala: [ '2.12', '2.13' ]
     steps:
       - uses: 7mind/github-env@minimal
       - name: Test compiler
         env:
           SCALA_VERSION: ${{ matrix.scala }}
-        run: ./build.sh nix gen test-scala test-cs test-ts test-pb
+        run: ./build.sh nix gen ${{ matrix.test }}
 
   publish-npm:
     runs-on: ubuntu-latest
