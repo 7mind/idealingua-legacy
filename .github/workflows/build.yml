@@ -50,6 +50,20 @@ jobs:
           # files: cobertura.xml,scoverage.xml
           # flags: unittests
 
+  test-compiler:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        test: [ 'test-scala', 'test-cs', 'test-ts', 'test-pb' ]
+        scala: [ '2.12', '2.13' ]
+    steps:
+      - uses: 7mind/github-env@minimal
+      - name: Test compiler
+        env:
+          SCALA_VERSION: ${{ matrix.scala }}
+        run: ./build.sh nix gen ${{ matrix.test }}
+
   publish-npm:
     runs-on: ubuntu-latest
     needs: [ 'checksecret' ]
@@ -84,7 +98,7 @@ jobs:
 
   publish-scala:
     runs-on: ubuntu-latest
-    needs: [ 'build', 'checksecret' ]
+    needs: [ 'build', 'test-compiler', 'checksecret' ]
     if: needs.checksecret.outputs.HAVE_SECRETS == 'true'
     strategy:
       fail-fast: false
@@ -111,7 +125,7 @@ jobs:
             echo "$SONATYPE_CREDENTIALS_FILE" > "$SONATYPE_SECRET"
             openssl aes-256-cbc -K ${OPENSSL_KEY} -iv ${OPENSSL_IV} -in secrets.tar.enc -out secrets.tar -d
             tar xvf secrets.tar
-          fi        
+          fi
           ./build.sh nix gen publish-scala
 
   all-good:

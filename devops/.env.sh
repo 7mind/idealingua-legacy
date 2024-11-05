@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
-
-set -e
-set -x
+set -xeuo pipefail
 
 source ./devops/.env-basic.sh
+
 export SCALA212=$(cat project/Deps.sc | grep 'val scala212 ' |  sed -r 's/.*\"(.*)\".**/\1/')
 export SCALA213=$(cat project/Deps.sc | grep 'val scala213 ' |  sed -r 's/.*\"(.*)\".**/\1/')
 export SCALA3=$(cat project/Deps.sc | grep 'val scala300 ' |  sed -r 's/.*\"(.*)\".**/\1/')
@@ -19,3 +18,5 @@ esac
 
 export SCALA_VERSION="$SCALA_VERSION"
 export VERSION_COMMAND="++ $SCALA_VERSION"
+
+env

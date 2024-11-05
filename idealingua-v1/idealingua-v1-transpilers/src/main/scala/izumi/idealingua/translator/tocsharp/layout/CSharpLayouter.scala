@@ -347,6 +347,7 @@ class CSharpLayouter(options: CSharpTranslatorOptions) extends TranslationLayout
         <IncludeSymbols>true</IncludeSymbols>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
       </PropertyGroup>
         <ItemGroup>
           {
@@ -381,13 +382,14 @@ class CSharpLayouter(options: CSharpTranslatorOptions) extends TranslationLayout
     // TODO: use safe xml builder
     val mfCommon = manifest.common
 
+    //          <licenseUrl>{mfCommon.licenses.head.url.url}</licenseUrl>
+
     val out = <package >
         <metadata>
           <id>{id}</id>
           <version>{renderVersion(mfCommon.version)}</version>
           <authors>{mfCommon.publisher.name}</authors>
           <owners>{mfCommon.publisher.id}</owners>
-          <licenseUrl>{mfCommon.licenses.head.url.url}</licenseUrl>
           <projectUrl>{mfCommon.website.url}</projectUrl>
           <releaseNotes>{mfCommon.releaseNotes}</releaseNotes>
           <description>{mfCommon.description}</description>

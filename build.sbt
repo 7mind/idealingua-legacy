@@ -1830,7 +1830,24 @@ lazy val `idealingua-v1` = (project in file("."))
         Some(Opts.resolver.sonatypeSnapshots)
     })
     ,
-    ThisBuild / credentials += Credentials(file(".secrets/credentials.sonatype-nexus.properties")),
+    ThisBuild / credentials ++= 
+    {
+    val credTarget = Path.userHome / ".sbt" / "secrets" / "credentials.sonatype-nexus.properties"
+    if (credTarget.exists) {
+      Seq(Credentials(credTarget))
+    } else {
+      Seq.empty
+    }
+    },
+    ThisBuild / credentials ++= 
+    {
+    val credTarget = file(".") / ".secrets" / "credentials.sonatype-nexus.properties"
+    if (credTarget.exists) {
+      Seq(Credentials(credTarget))
+    } else {
+      Seq.empty
+    }
+    },
     ThisBuild / homepage := Some(url("https://izumi.7mind.io")),
     ThisBuild / licenses := Seq("BSD-style" -> url("http://www.opensource.org/licenses/bsd-license.php")),
     ThisBuild / developers := List(

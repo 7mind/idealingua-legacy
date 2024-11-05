@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
-
-set -e
-set -x
+set -xeuo pipefail
 
 source ./devops/.env-basic.sh
-printenv
+env
 
 source ./devops/.validate-publishing.sh
 
