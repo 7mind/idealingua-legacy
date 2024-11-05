@@ -1855,7 +1855,7 @@ lazy val `idealingua-v1` = (project in file("."))
             ),
     ThisBuild / scmInfo := Some(ScmInfo(url("https://github.com/7mind/izumi"), "scm:git:https://github.com/7mind/izumi.git")),
     ThisBuild / scalacOptions += s"""-Xmacro-settings:scalatest-version=${V.scalatest}""",
-    ThisBuild / scalacOptions += """-Xmacro-settings:scalajs-version=1.16.0""",
+    ThisBuild / scalacOptions += """-Xmacro-settings:scalajs-version=1.17.0""",
     ThisBuild / scalacOptions += """-Xmacro-settings:bundler-version=0.21.1""",
     ThisBuild / scalacOptions += """-Xmacro-settings:sbt-js-version=1.0.2""",
     ThisBuild / scalacOptions += """-Xmacro-settings:crossproject-version=1.3.2""",
