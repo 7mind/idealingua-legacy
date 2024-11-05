@@ -19,7 +19,11 @@ function test_msbuild_prj() {
   cd $tmpdir/csharp
 
   msbuild /t:Restore /t:Rebuild
-  find . -name '*.nuspec' -print0 | xargs -I % -n 1 -0 nuget pack %
+
+  for f in nuspec/*.nuspec
+  do
+    nuget pack "$f"
+  done
 
   popd
   echo "IDL TEST DONE: $1"
