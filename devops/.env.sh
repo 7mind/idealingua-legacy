@@ -18,5 +18,6 @@ esac
 
 export SCALA_VERSION="$SCALA_VERSION"
 export VERSION_COMMAND="++ $SCALA_VERSION"
+export NUMCPU="$(nproc)"
 
 env

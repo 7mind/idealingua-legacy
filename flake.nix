@@ -37,6 +37,9 @@
             nodePackages.npm
             typescript
             yarn
+
+            coreutils
+            shellspec
           ];
         };
       }
