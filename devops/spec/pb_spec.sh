@@ -10,5 +10,6 @@ Describe 'Protobuf transpiler'
     When call test_pb_prj "$1"
     The status should be success
     The output should match pattern '*'
+    The stderr should match pattern '*'
   End
 End
