@@ -67,7 +67,7 @@ jobs:
       - uses: dorny/test-reporter@v1
         if: (needs.checksecret.outputs.HAVE_SECRETS == 'true') && (success() || failure())
         with:
-          name: Test reports (JDK ${{ matrix.java }}, Scala ${{ matrix.scala }}, JVM)
+          name: Test reports (${{ matrix.test }}, Scala ${{ matrix.scala }})
           path: '**/target/spec-reports/**/*.xml'
           reporter: java-junit
 
