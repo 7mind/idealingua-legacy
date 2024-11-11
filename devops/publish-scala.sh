@@ -12,13 +12,11 @@ echo "PUBLISH SCALA LIBRARIES..."
 
 if [[ "$CI_BRANCH" == "develop" ]] ; then
   sbt -batch -no-colors -v \
-    --java-home "$JAVA_HOME" \
     "$VERSION_COMMAND clean" \
     "$VERSION_COMMAND package" \
     "$VERSION_COMMAND publishSigned"
 else
   sbt -batch -no-colors -v \
-    --java-home "$JAVA_HOME" \
     "$VERSION_COMMAND clean" \
     "$VERSION_COMMAND package" \
     "$VERSION_COMMAND publishSigned" \
