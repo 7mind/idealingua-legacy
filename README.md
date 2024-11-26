@@ -47,10 +47,15 @@ including the following components:
 
 [VSCode Extension](https://marketplace.visualstudio.com/items?itemName=SeptimalMind.idealingua1) [VSCodium Extension](https://open-vsx.org/extension/SeptimalMind/idealingua1)
 
+Project Status
+--------------
+
+Currently this project is in maintanance-only phase. It may be useful, although new features will not be added.
+
+Have a look at [Baboon DML](https://github.com/7mind/baboon)
+
 Docs
 ----
-
-* **[Documentation](https://izumi.7mind.io/latest/release/doc/idealingua/index.html)**
 
 Example projects:
 
@@ -62,28 +67,7 @@ Support Chats:
 * [Izumi User Group [EN] on Telegram](https://t.me/izumi_en)
 * [Izumi User Group [RU] on Telegram](https://t.me/izumi_ru)
 
-Key goals
-=========
 
-We aim to provide tools that:
-
-1. Boost productivity and reduce code bloat
-2. Are as non-invasive as possible
-3. Are introspectable
-4. Are better than anything else out there :3
-
-Current state and future plans
-==============================
-
-We are looking for early adopters, contributors and sponsors.
-
-This project is currently a work in progress.
-
-In the future we are going to (or may) implement more tools based on PPER approach:
-
-1. Best in the world build system
-2. Best in the world cluster orchestration tool
-3. Best in the world load testing/macro-benchmark tool
 
 See:
 
