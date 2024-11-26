@@ -45,7 +45,7 @@ including the following components:
 4. [Opinionated SBT plugins](https://izumi.7mind.io/latest/release/doc/sbt/) (moved to [7mind/sbtgen](https://github.com/7mind/sbtgen)) – Reduces verbosity of SBT builds and introduces new features – inter-project shared test scopes and BOM plugins (from Maven)
 5. [Percept-Plan-Execute-Repeat (PPER)](https://izumi.7mind.io/latest/release/doc/pper/) – a pattern that enables modeling very complex domains and orchestrate deadly complex processes a lot easier than you're used to.
 
-[VSCode Extension](https://marketplace.visualstudio.com/items?itemName=SeptimalMind.idealingua1)
+[VSCode Extension](https://marketplace.visualstudio.com/items?itemName=SeptimalMind.idealingua1) [VSCodium Extension](https://open-vsx.org/extension/SeptimalMind/idealingua1)
 
 Docs
 ----
