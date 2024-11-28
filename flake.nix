@@ -27,7 +27,11 @@
             pname = "idealingua-v1";
             src = ./.;
             depsSha256 = "sha256-d9sTBvQbLwXH9aqy6N+a79jD8SIn9+/87KWZ3gXXW/I=";
-            nativeBuildInputs = with pkgs; [ coursier libarchive ];
+            nativeBuildInputs = with pkgs; [
+              coursier
+              libarchive
+              # gitMinimal
+            ];
             depsWarmupCommand = ''
               ./sbtgen.sc
               sbt "++2.13 clean" "++2.13 compile"
