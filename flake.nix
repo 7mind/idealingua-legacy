@@ -30,7 +30,6 @@
             nativeBuildInputs = with pkgs; [
               coursier
               libarchive
-              # gitMinimal
             ];
             depsWarmupCommand = ''
               ./sbtgen.sc
@@ -54,7 +53,7 @@
 
             graalvm-ce
             coursier
-            sbt
+            pkgs.buildPackages.sbt
 
             dotnet-sdk_6
             mono
@@ -71,6 +70,10 @@
 
             coreutils
             shellspec
+            jq
+            nix
+            gitMinimal
+
           ];
         };
       }

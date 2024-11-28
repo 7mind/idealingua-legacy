@@ -50,6 +50,15 @@ jobs:
           # files: cobertura.xml,scoverage.xml
           # flags: unittests
 
+  test-flake:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: 7mind/github-env@minimal
+      - name: Test flake
+        env:
+          SCALA_VERSION: ${{ matrix.scala }}
+        run: ./build.sh nix validate-flake
+
   test-compiler:
     runs-on: ubuntu-latest
     needs: [ 'checksecret' ]
@@ -105,7 +114,7 @@ jobs:
 
   publish-scala:
     runs-on: ubuntu-latest
-    needs: [ 'build', 'test-compiler', 'checksecret' ]
+    needs: [ 'build', 'test-compiler', 'test-flake', 'checksecret' ]
     if: needs.checksecret.outputs.HAVE_SECRETS == 'true'
     strategy:
       fail-fast: false
