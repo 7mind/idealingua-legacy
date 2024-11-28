@@ -37,6 +37,7 @@ object Idealingua {
 
   object PV {
     val izumi                      = Version.VExpr("PV.izumi")
+    val packager                   = Version.VExpr("PV.packager")
     val sbt_mdoc                   = Version.VExpr("PV.sbt_mdoc")
     val sbt_paradox_material_theme = Version.VExpr("PV.sbt_paradox_material_theme")
     val sbt_ghpages                = Version.VExpr("PV.sbt_ghpages")
@@ -422,6 +423,9 @@ object Idealingua {
         ).map(_ in Scope.Compile.all),
         platforms = Targets.jvm2,
         settings  = Seq.empty,
+        plugins = Plugins(
+          Seq(Plugin("JavaAppPackaging"))
+        ),
       ),
     ),
     pathPrefix       = Projects.idealingua.basePath,
@@ -449,6 +453,7 @@ object Idealingua {
       SbtPlugin("com.github.sbt", "sbt-pgp", PV.sbt_pgp),
       SbtPlugin("org.scoverage", "sbt-scoverage", PV.sbt_scoverage),
       SbtPlugin("io.7mind.izumi", "sbt-izumi-deps", PV.izumi),
+      SbtPlugin("com.github.sbt", "sbt-native-packager", PV.packager),
     ),
   )
 }
