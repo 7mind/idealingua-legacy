@@ -58,7 +58,7 @@ jobs:
         env:
           SCALA_VERSION: ${{ matrix.scala }}
         run: |
-          if [[ "$CI_BRANCH" != "develop" && "$CI_PULL_REQUEST" == "false" ]] ; then
+          if [[ "$CI_BRANCH_TAG" =~ ^v.*$ && "$CI_PULL_REQUEST" == "false" ]] ; then
             ./build.sh nix flake-validate
           fi
 
