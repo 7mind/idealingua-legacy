@@ -57,7 +57,7 @@ jobs:
       - name: Test flake
         env:
           SCALA_VERSION: ${{ matrix.scala }}
-        run:
+        run: |
           if [[ "$CI_BRANCH" != "develop" && "$CI_PULL_REQUEST" == "false" ]] ; then
             ./build.sh nix flake-validate
           fi
