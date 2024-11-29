@@ -4,6 +4,6 @@ set -xe
 
 ./sbtgen.sc
 
-git add .
+git add . || true
 
 sbt "++2.13" "release"

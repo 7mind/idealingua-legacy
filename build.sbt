@@ -1846,7 +1846,6 @@ lazy val `idealingua-v1` = (project in file("."))
               }
             },
     releaseProcess := Seq[ReleaseStep](
-      releaseStepTask(refreshFlakeTask),
       checkSnapshotDependencies,
       inquireVersions,
       runClean,
