@@ -19,3 +19,5 @@ IDEALINGUA_VERSION=$(cat version.sbt | sed -r 's/.*\"(.*)\".**/\1/' | sed -E "s/
 PROPER_HASH=$(nix build --print-build-logs 2>&1 . | grep "got:" | awk '{print $2}')
 
 do_update "$IDEALINGUA_VERSION" "$PROPER_HASH" ./flake.nix
+
+git add . || true

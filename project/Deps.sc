@@ -272,7 +272,7 @@ object Idealingua {
                               |  releaseStepTask(refreshFlakeTask),
                               |  commitReleaseVersion,
                               |  tagRelease,
-                              |  publishArtifacts,
+                              |  //publishArtifacts,
                               |  setNextVersion,
                               |  commitNextVersion,
                               |  pushChanges
