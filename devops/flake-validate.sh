@@ -4,7 +4,7 @@ set -xe
 
 hash_before=$(cat flake.nix| md5sum)
 
-./devops/refresh.sh
+./devops/flake-refresh.sh
 
 hash_after=$(cat flake.nix| md5sum)
 

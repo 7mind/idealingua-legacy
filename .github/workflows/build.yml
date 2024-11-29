@@ -57,7 +57,7 @@ jobs:
       - name: Test flake
         env:
           SCALA_VERSION: ${{ matrix.scala }}
-        run: ./build.sh nix validate-flake
+        run: ./build.sh nix flake-validate
 
   test-compiler:
     runs-on: ubuntu-latest

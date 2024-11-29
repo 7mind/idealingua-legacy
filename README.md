@@ -66,3 +66,12 @@ Support Chats:
 * [Izumi on Gitter](https://gitter.im/7mind/izumi)
 * [Izumi User Group [EN] on Telegram](https://t.me/izumi_en)
 * [Izumi User Group [RU] on Telegram](https://t.me/izumi_ru)
+
+Release process
+---------------
+
+`nix` must be installed and available.
+
+```bash
+./build.sh release
+```

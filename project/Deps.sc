@@ -256,6 +256,27 @@ object Idealingua {
             |  Seq.empty
             |}
             |}""".stripMargin.raw,
+        "refreshFlakeTask" := """{
+          val log = streams.value.log
+          val result = "./build.sh nix flake-refresh flake-validate" ! log
+          if (result != 0) {
+            throw new MessageOnlyException("flake.nix update failed!")
+          }
+        }""".stripMargin.raw,
+        "releaseProcess" := """Seq[ReleaseStep](
+                              |  checkSnapshotDependencies,
+                              |  inquireVersions,
+                              |  runClean,
+                              |  runTest,
+                              |  setReleaseVersion,
+                              |  releaseStepTask(refreshFlakeTask),
+                              |  commitReleaseVersion,
+                              |  tagRelease,
+                              |  publishArtifacts,
+                              |  setNextVersion,
+                              |  commitNextVersion,
+                              |  pushChanges
+                              |)""".stripMargin.raw,
         "homepage" in SettingScope.Build := """Some(url("https://izumi.7mind.io"))""".raw,
         "licenses" in SettingScope.Build := """Seq("BSD-style" -> url("http://www.opensource.org/licenses/bsd-license.php"))""".raw,
         "developers" in SettingScope.Build :=
@@ -442,7 +463,13 @@ object Idealingua {
     sharedSettings    = Projects.root.sharedSettings,
     sharedAggSettings = Projects.root.sharedAggSettings,
     rootSettings      = Projects.root.rootSettings,
-    imports           = Seq.empty,
+    imports = Seq(
+      Import("sbtrelease.ReleaseStateTransformations._"),
+      Import("""scala.sys.process._
+               |
+               |lazy val refreshFlakeTask = taskKey[Unit]("Refresh flake.nix")
+               |""".stripMargin),
+    ),
     globalLibs = Seq(
       ScopedLibrary(projector, FullDependencyScope(Scope.Compile, Platform.All, ScalaVersionScope.AllScala2), compilerPlugin = true),
       scalatest,
