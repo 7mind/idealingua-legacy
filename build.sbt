@@ -1854,7 +1854,7 @@ lazy val `idealingua-v1` = (project in file("."))
       releaseStepTask(refreshFlakeTask),
       commitReleaseVersion,
       tagRelease,
-      publishArtifacts,
+      //publishArtifacts,
       setNextVersion,
       commitNextVersion,
       pushChanges
