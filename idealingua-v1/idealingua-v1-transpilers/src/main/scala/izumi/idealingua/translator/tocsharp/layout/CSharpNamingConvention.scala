@@ -40,7 +40,7 @@ class CSharpNamingConvention(rule: ProjectNamingRule) {
   }
 
   def projectDirName(did: DomainId): String = {
-    naming.baseProjectId(did).map(_.capitalize).mkString
+    naming.baseProjectId(did).map(_.capitalize).mkString(".")
   }
 
 }
