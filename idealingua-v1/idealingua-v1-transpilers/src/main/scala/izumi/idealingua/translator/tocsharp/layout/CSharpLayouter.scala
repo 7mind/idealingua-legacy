@@ -72,7 +72,7 @@ class CSharpLayouter(options: CSharpTranslatorOptions) extends TranslationLayout
             s"src/$prjDirName/$prjName.csproj"
         } ++ Seq(s"src/${naming.irtDir}/${naming.irtDir}.csproj")
 
-        val src = mainSrcs ++ csproj(prjDir, csdeps, basicDeps)
+        val src = mainSrcs ++ csproj(prjId, csdeps, basicDeps)
 
         val testDeps         = pkgMf.nuget.dependencies ++ pkgMf.nuget.testDependencies ++ Seq(ManifestDependency(naming.projectId(t.typespace.domain.id), mfVersion))
         val pkgMfTest        = pkgMf.copy(nuget = pkgMf.nuget.copy(dependencies = testDeps))
