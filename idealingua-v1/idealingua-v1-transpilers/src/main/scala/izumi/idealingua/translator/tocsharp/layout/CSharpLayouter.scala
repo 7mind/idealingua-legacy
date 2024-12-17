@@ -67,8 +67,8 @@ class CSharpLayouter(options: CSharpTranslatorOptions) extends TranslationLayout
         val csdeps = t.typespace.domain.meta.directImports.map {
           i =>
             val id         = i.id
-            val prjDirName = s"${naming.projectDirName(id)}"
-            val prjName    = prjDirName
+            val prjDirName = naming.projectDirName(id)
+            val prjName    = naming.projectId(id)
             s"src/$prjDirName/$prjName.csproj"
         } ++ Seq(s"src/${naming.irtDir}/${naming.irtDir}.csproj")
 
@@ -82,7 +82,7 @@ class CSharpLayouter(options: CSharpTranslatorOptions) extends TranslationLayout
         val csdepsTest = t.typespace.domain.meta.directImports.map {
           i =>
             val id          = i.id
-            val prjDirName  = s"${naming.projectDirName(id)}"
+            val prjDirName  = naming.projectDirName(id)
             val prjTestName = s"${naming.projectDirName(id)}.Test"
 
             s"tests/$prjDirName/$prjTestName.csproj"
@@ -135,8 +135,8 @@ class CSharpLayouter(options: CSharpTranslatorOptions) extends TranslationLayout
       out =>
         val id = out.typespace.domain.id
 
-        val prjDirName  = s"${naming.projectDirName(id)}"
-        val prjName     = prjDirName
+        val prjDirName  = naming.projectDirName(id)
+        val prjName     = naming.projectId(id)
         val prjTestName = s"$prjDirName.Test"
 
         Seq(
