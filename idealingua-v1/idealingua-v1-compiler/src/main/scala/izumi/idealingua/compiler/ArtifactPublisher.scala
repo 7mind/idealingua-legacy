@@ -132,7 +132,7 @@ class ArtifactPublisher(targetDir: Path, lang: IDLLanguage, creds: Credentials, 
 
     log.log("Preparing credentials")
     Process(
-      s"dotnet nuget add source ${creds.nugetRepo} -name IzumiPublishSource --username ${creds.nugetUser} --password ${creds.nugetPassword}",
+      s"dotnet nuget add source ${creds.nugetRepo} --name IzumiPublishSource --username ${creds.nugetUser} --password ${creds.nugetPassword}",
       targetDirAsFile,
     ).#||("true").lineStream.foreach(log.log)
 
