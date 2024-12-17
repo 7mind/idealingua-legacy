@@ -160,7 +160,7 @@ class ArtifactPublisher(targetDir: Path, lang: IDLLanguage, creds: Credentials, 
     IzFiles.walk(targetDirAsFile).filter(_.getFileName.toString.endsWith(".nupkg")).foreach {
       pack =>
         Process(
-          s"dotnet nuget push ${pack.getFileName.toString} -s ${creds.nugetRepo}",
+          s"dotnet nuget push ${pack.toString} -s ${creds.nugetRepo}",
           targetDirAsFile,
         ).lineStream.foreach(log.log)
     }
