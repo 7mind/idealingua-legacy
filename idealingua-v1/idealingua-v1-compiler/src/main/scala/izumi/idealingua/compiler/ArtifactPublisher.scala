@@ -123,38 +123,45 @@ class ArtifactPublisher(targetDir: Path, lang: IDLLanguage, creds: Credentials, 
   }.toEither
 
   private def publishCsharp(targetDir: Path, creds: CsharpCredentials): Either[Throwable, Unit] = Try {
-    val nuspecDir  = targetDir.resolve("nuspec")
-    val nuspecFile = nuspecDir.toFile
+//    val nuspecDir  = targetDir.resolve("nuspec")
+//    val nuspecDirAsFile = nuspecDir.toFile
 
-    log.log("Prepare to package C# sources")
+    val targetDirAsFile = targetDir.toFile
+
+    log.log("Publishing C#...")
 
     log.log("Preparing credentials")
     Process(
-      s"nuget sources Add -Name IzumiPublishSource -Source ${creds.nugetRepo}",
-      nuspecFile,
+      s"dotnet nuget add source ${creds.nugetRepo} -name IzumiPublishSource --username ${creds.nugetUser} --password ${creds.nugetPassword}",
+      targetDirAsFile,
     ).#||("true").lineStream.foreach(log.log)
 
+//    Process(
+//      s"nuget setapikey ${creds.nugetUser}:${creds.nugetPassword} -Source IzumiPublishSource",
+//      nuspecDirAsFile,
+//    ).lineStream.foreach(log.log)
+//
+//    log.log("Publishing")
+//    Files.list(nuspecDir).filter(_.getFileName.toString.endsWith(".nuspec")).iterator().asScala.foreach {
+//      module =>
+//        Try(
+//          Process(
+//            s"nuget pack ${module.getFileName.toString}",
+//            nuspecDirAsFile,
+//          ).lineStream.foreach(log.log)
+//        )
+//    }
+
     Process(
-      s"nuget setapikey ${creds.nugetUser}:${creds.nugetPassword} -Source IzumiPublishSource",
-      nuspecFile,
+      s"dotnet build -c Release",
+      targetDirAsFile,
     ).lineStream.foreach(log.log)
 
-    log.log("Publishing")
-    Files.list(nuspecDir).filter(_.getFileName.toString.endsWith(".nuspec")).iterator().asScala.foreach {
-      module =>
-        Try(
-          Process(
-            s"nuget pack ${module.getFileName.toString}",
-            nuspecFile,
-          ).lineStream.foreach(log.log)
-        )
-    }
-
-    IzFiles.walk(nuspecFile).filter(_.getFileName.toString.endsWith(".nupkg")).foreach {
+    IzFiles.walk(targetDirAsFile).filter(_.getFileName.toString.endsWith(".nupkg")).foreach {
       pack =>
         Process(
-          s"nuget push ${pack.getFileName.toString} -Source IzumiPublishSource",
-          nuspecFile,
+          s"dotnet nuget push ${pack.getFileName.toString} -s IzumiPublishSource",
+          targetDirAsFile,
         ).lineStream.foreach(log.log)
     }
   }.toEither
