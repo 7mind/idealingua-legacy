@@ -17,8 +17,8 @@ import izumi.idealingua.translator.{Translated, Translator}
 
 object CSharpTranslator {
   final val defaultExtensions = Seq(
-    JsonNetExtension,
-    NUnitExtension,
+    JsonNetExtension
+    // NUnitExtension,
   )
 }
 
