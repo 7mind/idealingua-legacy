@@ -88,7 +88,7 @@ class CSharpLayouter(options: CSharpTranslatorOptions) extends TranslationLayout
             s"tests/$prjDirName/$prjTestName.csproj"
         }
 
-        val tests = testsSrcs ++ csproj(s"$prjDir.Test", csdepsTest ++ Seq(s"src/$prjDir/$prjDir.csproj"), basicTestDeps)
+        val tests = testsSrcs ++ csproj(s"$prjDir.Test", csdepsTest ++ Seq(s"src/$prjDir/${naming.projectId(t.typespace.domain.id)}.csproj"), basicTestDeps)
 
         val nuspecs = Seq(nuspecModule, nuspecTestModule)
         addPrefix(src, Seq(s"src", prjDir)) ++
