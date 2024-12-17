@@ -320,7 +320,7 @@ class CSharpLayouter(options: CSharpTranslatorOptions) extends TranslationLayout
        """.stripMargin.trim
 
     Seq(
-      ExtendedModule.RuntimeModule(Module(ModuleId(Seq.empty, s"${naming.pkgId}.sln"), sln)),
+      ExtendedModule.RuntimeModule(Module(ModuleId(Seq.empty, s"project.sln"), sln)),
       ExtendedModule.RuntimeModule(Module(ModuleId(Seq.empty, s"Directory.Build.props"), format(props))),
       ExtendedModule.RuntimeModule(Module(ModuleId(Seq.empty, s"README.md"), readme)),
     )
