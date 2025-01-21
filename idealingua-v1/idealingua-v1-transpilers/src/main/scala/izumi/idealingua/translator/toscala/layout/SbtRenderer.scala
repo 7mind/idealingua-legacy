@@ -19,12 +19,15 @@ class SbtRenderer {
     parts.mkString(" ")
   }
 
-  def renderScope(scope: Scope, key: String): String = {
-    scope match {
-      case Scope.ThisBuild =>
-        s"ThisBuild / $key"
-      case Scope.Project =>
-        key
+  def renderScope(scopes: List[Scope], key: String): String = {
+    if (scopes == List(Scope.ThisBuild)) {
+      key
+    } else {
+      scopes.map {
+        case Scope.ThisBuild     => "ThisBuild"
+        case Scope.Project       => "ThisProject"
+        case Scope.Custom(scope) => scope
+      }.appended(key).mkString(" / ")
     }
   }
 

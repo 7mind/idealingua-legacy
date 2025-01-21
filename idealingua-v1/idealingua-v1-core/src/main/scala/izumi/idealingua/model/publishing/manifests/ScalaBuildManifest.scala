@@ -14,6 +14,7 @@ case class SbtOptions(
   enableScalaJs: Boolean,
   scalaVersion: Option[String],
   sbtVersion: Option[String],
+  enableDocs: Option[Boolean],
 )
 
 object SbtOptions {
@@ -23,6 +24,7 @@ object SbtOptions {
       enableScalaJs = true,
       scalaVersion  = None,
       sbtVersion    = None,
+      enableDocs    = None,
     )
   }
 }
