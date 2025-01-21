@@ -20,7 +20,7 @@ class SbtRenderer {
   }
 
   def renderScope(scopes: List[Scope], key: String): String = {
-    if (scopes == List(Scope.ThisBuild)) {
+    if (scopes == List(Scope.Project)) {
       key
     } else {
       scopes.map {
