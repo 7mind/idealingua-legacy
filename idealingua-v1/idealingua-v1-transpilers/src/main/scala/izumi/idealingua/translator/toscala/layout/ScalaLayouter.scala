@@ -113,6 +113,10 @@ class ScalaLayouter(options: ScalaTranslatorOptions) extends TranslationLayouter
           Seq("resolvers" -> Append(RawExpr("Opts.resolver.sonatypeReleases")))
         }
 
+        val docs = Seq(
+          "publishArtifact" -> Assign(options.manifest.sbt.enableDocs.getOrElse(false), List(Scope.ThisBuild, Scope.Custom("packageDoc"))),
+        )
+
         val metadata = Seq(
           "name"         -> Assign(options.manifest.common.name, Scope.Project),
           "organization" -> Assign(options.manifest.common.group),
@@ -122,7 +126,7 @@ class ScalaLayouter(options: ScalaTranslatorOptions) extends TranslationLayouter
         )
 
         val renderer = new SbtRenderer()
-        val keys     = (metadata ++ resolvers ++ deps ++ circeDerivationWorkaround).map(renderer.renderOp)
+        val keys     = (docs ++ metadata ++ resolvers ++ deps ++ circeDerivationWorkaround).map(renderer.renderOp)
 
         val content = keys ++ projDefs ++ Seq(bundle, agg)
 

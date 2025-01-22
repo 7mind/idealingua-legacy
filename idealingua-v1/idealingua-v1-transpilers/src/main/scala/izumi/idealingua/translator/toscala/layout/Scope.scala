@@ -8,4 +8,5 @@ object Scope {
 
   case object Project extends Scope
 
+  case class Custom(scope: String) extends Scope
 }
