@@ -23,11 +23,11 @@ class SbtRenderer {
     if (scopes == List(Scope.Project)) {
       key
     } else {
-      scopes.map {
+      (scopes ++ List(Scope.Custom(key))).map {
         case Scope.ThisBuild     => "ThisBuild"
         case Scope.Project       => "ThisProject"
         case Scope.Custom(scope) => scope
-      }.appended(key).mkString(" / ")
+      }.mkString(" / ")
     }
   }
 
